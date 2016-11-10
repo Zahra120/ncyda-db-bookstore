@@ -19,6 +19,8 @@ var Book = sequelize.define('book', {
 });
 // ======================
 
+app.set('view engine', 'pug');
+
 app.use(express.static('public'));
 
 app.use(morgan('dev'));
@@ -32,8 +34,6 @@ app.use(methodOverride((req, res) => {
     return method;
   }})
 );
-
-app.set('view engine', 'pug');
 
 app.get('/', (request, response) => {
   response.redirect('/books');

@@ -19,16 +19,6 @@ router.get('/', (request, response) => {
   });
 });
 
-router.post('/', (request, response) => {
-  if (request.body.title) {
-    Book.create(request.body).then(() => {
-      response.redirect('/books');
-    });
-  } else {
-    response.redirect('/books/new');
-  }
-});
-
 router.get('/new', (request, response) => {
   response.render('books/new');
 });
@@ -45,14 +35,14 @@ router.get('/:id/edit', (request, response) => {
   });
 });
 
-router.delete('/:id', (request, response) => {
-  Book.destroy({
-    where: {
-      id: request.params.id
-    }
-  }).then(() => {
-    response.redirect('/books');
-  });
+router.post('/', (request, response) => {
+  if (request.body.title) {
+    Book.create(request.body).then(() => {
+      response.redirect('/books');
+    });
+  } else {
+    response.redirect('/books/new');
+  }
 });
 
 router.put('/:id', (request, response) => {
@@ -62,6 +52,16 @@ router.put('/:id', (request, response) => {
     }
   }).then(() => {
     response.redirect('/books/' + request.params.id);
+  });
+});
+
+router.delete('/:id', (request, response) => {
+  Book.destroy({
+    where: {
+      id: request.params.id
+    }
+  }).then(() => {
+    response.redirect('/books');
   });
 });
 
