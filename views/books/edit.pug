@@ -4,7 +4,8 @@ block content
   .container
     h1 Edit Form
     hr
-    form(action="/books/" + book.id method="PUT")
+    form(action="/books/" + book.id method="POST")
+      input(type="hidden" name="_method" value="PUT")
       div(class="form-group")
         label(for="book-title") Title
         input(name="title" type="text" class="form-control" id="book-title" value=book.title)
