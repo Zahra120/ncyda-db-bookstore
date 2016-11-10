@@ -46,7 +46,7 @@ router.post('/', (request, response) => {
 });
 
 router.put('/:id', (request, response) => {
-  Book.update(request.params, {
+  Book.update(request.body, {
     where: {
       id: request.params.id
     }
