@@ -10,6 +10,15 @@ var app = express(),
 
 var booksRouter = require('./routes/books');
 
+// Our model definition:
+var Book = sequelize.define('book', {
+  title: Sequelize.STRING,
+  imageURL: Sequelize.STRING,
+  author: Sequelize.STRING,
+  description: Sequelize.TEXT
+});
+// ======================
+
 app.use(express.static('public'));
 
 app.use(morgan('dev'));
