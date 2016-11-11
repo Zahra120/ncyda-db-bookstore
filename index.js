@@ -2,22 +2,13 @@ const express = require('express'),
       morgan = require('morgan'),
       bodyParser = require('body-parser'),
       methodOverride = require('method-override'),
-      pug = require('pug'),
-      Sequelize = require('sequelize');
+      pug = require('pug');
 
-var app = express(),
-    sequelize = new Sequelize('izelnakri', 'izelnakri', '', { dialect: 'postgres' });
+var db = require('./models');
+
+var app = express();
 
 var booksRouter = require('./routes/books');
-
-// Our model definition:
-var Book = sequelize.define('book', {
-  title: Sequelize.STRING,
-  imageURL: Sequelize.STRING,
-  author: Sequelize.STRING,
-  description: Sequelize.TEXT
-});
-// ======================
 
 app.set('view engine', 'pug');
 
@@ -41,8 +32,8 @@ app.get('/', (request, response) => {
 
 app.use('/books', booksRouter);
 
-sequelize.sync().then(() => {
-  console.log('Connected to database');
+
+db.sequelize.sync().then(() => {
   app.listen(3000, () => {
     console.log('Web Server is running on port 3000');
   });
